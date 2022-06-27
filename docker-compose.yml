@@ -29,7 +29,7 @@ services:
       interval: 3s
       retries: 12
     volumes:
-      - /etc/localtime:/etc/localtime:ro
+      # - /etc/localtime:/etc/localtime:ro
       # - /etc/timezone:/etc/timezone:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # - ./config/acme.json:/acme.json # 映射证书文件，SSL 证书申请成功后，就会存在这个文件中
@@ -114,7 +114,7 @@ services:
     restart: always
     network_mode: bridge
     volumes:
-      - /etc/localtime:/etc/localtime:ro
+      # - /etc/localtime:/etc/localtime:ro
       - ./cert:/data/cert
       - ./acme:/acme.sh
     environment:
