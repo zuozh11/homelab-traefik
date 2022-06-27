@@ -34,7 +34,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       # - ./config/acme.json:/acme.json # 映射证书文件，SSL 证书申请成功后，就会存在这个文件中
       - ./config:/etc/traefik/config/:ro
-      - ./acme/cert/:/data/cert/:ro
+      - ./cert/:/data/cert/:ro
     command:
       - '--pilot.token=1b75f1f2-252b-45fa-8695-d1f2bfaf2151'
       - '--global.sendanonymoususage=false'
@@ -115,8 +115,8 @@ services:
     network_mode: bridge
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - /mnt/user/appdata/traefik/acme/cert:/data/cert
-      - /mnt/user/appdata/traefik/acme/data:/acme.sh
+      - ./cert:/data/cert
+      - ./acme:/acme.sh
     environment:
       DP_Id: '305724'
       DP_Key: '200504c4442afc3681a061e50f374e01'
