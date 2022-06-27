@@ -1,0 +1,20 @@
+[http.routers]
+  [http.routers.minio]
+    entrypoints=["https"]
+    rule="Host(`minio.kamipon.com`)"
+    tls=true
+    # middlewares=["gzip@file"]
+    service = "minio-service"
+  [http.routers.minio-api]
+    entrypoints=["https"]
+    rule="Host(`share.kamipon.com`)"
+    tls=true
+    service = "minio-api-service"
+
+[http.services]
+  [http.services.minio-service.loadBalancer]
+    [[http.services.minio-service.loadBalancer.servers]]
+      url = "http://10.99.1.18:9001/"
+  [http.services.minio-api-service.loadBalancer]
+    [[http.services.minio-api-service.loadBalancer.servers]]
+      url = "http://10.99.1.18:9000/"

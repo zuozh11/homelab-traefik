@@ -1,0 +1,10 @@
+[tcp.routers]
+  [tcp.routers.postgres]
+    entrypoints="postgres"
+    rule = "HostSNI(`*`)"
+    service = "postgres-service"
+
+[tcp.services]
+  [tcp.services.postgres-service.loadBalancer]
+    [[tcp.services.postgres-service.loadBalancer.servers]]
+      address = "10.99.1.25:5432"

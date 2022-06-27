@@ -1,0 +1,18 @@
+[http.routers]
+  [http.routers.nextcloud]
+    entrypoints=["https"]
+    rule="Host(`nextcloud.kamipon.com`)"
+    tls=true
+    middlewares=["nextcloud-dav@file","gzip@file"]
+    service = "nextcloud-service"
+
+[http.middlewares]
+  [http.middlewares.nextcloud-dav.redirectRegex]
+    permanent = true
+    regex = "https://(.*)/.well-known/(card|cal)dav"
+    replacement = "https://${1}/remote.php/dav/"
+
+[http.services]
+  [http.services.nextcloud-service.loadBalancer]
+    [[http.services.nextcloud-service.loadBalancer.servers]]
+      url = "http://10.99.1.12:80/"

@@ -1,0 +1,123 @@
+version: '3'
+
+services:
+
+  traefik:
+    image: traefik:latest
+    container_name: traefik
+    restart: always
+    security_opt:
+      - no-new-privileges:true
+    network_mode: bridge
+    ports:
+      - 82:82
+      - 442:442
+      - 3306:3306
+      - 6379:6379
+      - 2222:2222
+      - 5432:5432
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '1m'
+    healthcheck:
+      test:
+        [
+          'CMD-SHELL',
+          'wget -q --spider --proxy off localhost:8080/ping || exit 1',
+        ]
+      interval: 3s
+      retries: 12
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      # - /etc/timezone:/etc/timezone:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      # - ./config/acme.json:/acme.json # 映射证书文件，SSL 证书申请成功后，就会存在这个文件中
+      - ./config:/etc/traefik/config/:ro
+      - ./acme/cert/:/data/cert/:ro
+    command:
+      - '--pilot.token=1b75f1f2-252b-45fa-8695-d1f2bfaf2151'
+      - '--global.sendanonymoususage=false'
+      - '--global.checknewversion=true'
+      - '--entrypoints.http.address=:82'
+      - '--entrypoints.https.address=:442'
+      - '--entrypoints.https.http.tls=true'
+      - "--entrypoints.ssh.address=:2222"
+      - "--entrypoints.mysql.address=:3306"
+      - "--entrypoints.redis.address=:6379"
+      - "--entrypoints.postgres.address=:5432"
+      - '--api=true'
+      - '--api.insecure=true'
+      - '--api.dashboard=true'
+      - '--api.debug=false'
+      - '--ping=true'
+      - '--log.level=warn'
+      - '--log.format=common'
+      - '--accesslog=false'
+      - '--providers.docker=true'
+      - '--providers.docker.watch=true'
+      - '--providers.docker.exposedbydefault=false'
+      - '--providers.docker.endpoint=unix:///var/run/docker.sock'
+      - '--providers.docker.swarmMode=false'
+      - '--providers.docker.useBindPortIP=false'
+      - '--providers.docker.network=bridge'
+      #- '--providers.redis.endpoints=10.99.1.22:6379'
+      - '--providers.file=true'
+      - '--providers.file.watch=true'
+      - '--providers.file.directory=/etc/traefik/config'
+      - '--providers.file.debugloggeneratedtemplate=false'
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.docker.network=bridge'
+
+      # 处理网页
+      - 'traefik.http.routers.traefik-dash-web.entrypoints=https'
+      - 'traefik.http.routers.traefik-dash-web.rule=Host(`traefik.kamipon.com`) && PathPrefix(`/`)'
+      - 'traefik.http.routers.traefik-dash-web.tls=true'
+      - 'traefik.http.routers.traefik-dash-web.service=dashboard@internal'
+      - 'traefik.http.routers.traefik-dash-web.middlewares=error-pages-middleware'
+      # 处理接口
+      - 'traefik.http.routers.traefik-dash-api.entrypoints=https'
+      - 'traefik.http.routers.traefik-dash-api.rule=Host(`traefik.kamipon.com`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))'
+      - 'traefik.http.routers.traefik-dash-api.tls=true'
+      - 'traefik.http.routers.traefik-dash-api.service=api@internal'
+      - 'traefik.http.routers.traefik-dash-api.middlewares=error-pages-middleware'
+    depends_on:
+      - error-pages
+
+  error-pages:
+    image: tarampampam/error-pages:latest # Using the latest tag is highly discouraged. Please, use tags in X.Y.Z format
+    container_name: error-pages
+    restart: always
+    network_mode: bridge
+    environment:
+      # - "TEMPLATE_NAME=ghost"
+      - 'TEMPLATE_NAME=app-down'
+    labels:
+      - 'traefik.enable=true'
+      # use as "fallback" for any NON-registered services (with priority below normal)
+      - 'traefik.http.routers.error-pages-router.rule=HostRegexp(`{host:.+}`)'
+      - 'traefik.http.routers.error-pages-router.priority=10'
+      # should say that all of your services work on https
+      - 'traefik.http.routers.error-pages-router.entrypoints=https'
+      - 'traefik.http.routers.error-pages-router.middlewares=error-pages-middleware'
+      # "errors" middleware settings
+      - 'traefik.http.middlewares.error-pages-middleware.errors.status=400-599'
+      - 'traefik.http.middlewares.error-pages-middleware.errors.service=error-pages-service'
+      - 'traefik.http.middlewares.error-pages-middleware.errors.query=/{status}.html'
+      # define service properties
+      - 'traefik.http.services.error-pages-service.loadbalancer.server.port=8080'
+
+  acme:
+    image: neilpang/acme.sh
+    container_name: acme.sh
+    restart: always
+    network_mode: bridge
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /mnt/user/appdata/traefik/acme/cert:/data/cert
+      - /mnt/user/appdata/traefik/acme/data:/acme.sh
+    environment:
+      DP_Id: '305724'
+      DP_Key: '200504c4442afc3681a061e50f374e01'
+    command: daemon

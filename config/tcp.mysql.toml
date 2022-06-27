@@ -1,0 +1,10 @@
+[tcp.routers]
+  [tcp.routers.mysql]
+    entrypoints="mysql"
+    rule = "HostSNI(`*`)"
+    service = "mysql-service"
+
+[tcp.services]
+  [tcp.services.mysql-service.loadBalancer]
+    [[tcp.services.mysql-service.loadBalancer.servers]]
+      address = "10.99.1.21:3306"

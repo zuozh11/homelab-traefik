@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.wordpress]
+    entrypoints=["https"]
+    rule="Host(`wordpress.kamipon.com`,`blog.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file"]
+    service = "wordpress-service"
+
+[http.services]
+  [http.services.wordpress-service.loadBalancer]
+    [[http.services.wordpress-service.loadBalancer.servers]]
+      url = "http://10.99.1.2:8088/"

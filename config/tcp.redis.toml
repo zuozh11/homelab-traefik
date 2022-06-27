@@ -1,0 +1,10 @@
+[tcp.routers]
+  [tcp.routers.redis]
+    entrypoints="redis"
+    rule = "HostSNI(`*`)"
+    service = "redis-service"
+
+[tcp.services]
+  [tcp.services.redis-service.loadBalancer]
+    [[tcp.services.redis-service.loadBalancer.servers]]
+      address = "10.99.1.22:6379"
