@@ -4,6 +4,8 @@ echo
 echo '开始初始化...'
 echo '启动容器...'
 docker-compose up -d
+echo '等待10秒容器启动'
+sleep 10
 echo '切换到Let`s letsencrypt'
 docker exec acme.sh --set-default-ca --server letsencrypt
 echo '设置更新'
