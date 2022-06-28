@@ -1,0 +1,11 @@
+[http.routers]
+  [http.routers.portainer]
+    entrypoints=["https"]
+    rule="Host(`portainer.kamipon.com`)"
+    middlewares=["gzip@file","error-pages-middleware@docker"]
+    service = "portainer-service"
+
+[http.services]
+  [http.services.portainer-service.loadBalancer]
+    [[http.services.portainer-service.loadBalancer.servers]]
+      url = "http://10.99.1.2:9006/"
