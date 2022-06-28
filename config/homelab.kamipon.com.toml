@@ -1,0 +1,11 @@
+[http.routers]
+  [http.routers.homelab]
+    entrypoints=["https"]
+    rule="Host(`homelab.kamipon.com`,`www.kamipon.com`,`flame.kamipon.com`)"
+    middlewares=["gzip@file","error-pages-middleware@docker"]
+    service = "homelab-service"
+
+[http.services]
+  [http.services.homelab-service.loadBalancer]
+    [[http.services.homelab-service.loadBalancer.servers]]
+      url = "http://10.99.1.2:5005/"
