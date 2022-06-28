@@ -2,6 +2,7 @@
   [http.routers.openwrt]
     entrypoints="https"
     rule="Host(`openwrt.kamipon.com`)"
+    tls=true
     # middlewares=["error-pages-middleware@docker"]
     middlewares=["gzip@file"]
     service = "openwrt-service"

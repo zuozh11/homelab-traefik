@@ -2,6 +2,7 @@
   [http.routers.subconverter]
     entrypoints=["https"]
     rule="Host(`subconverter.kamipon.com`)"
+    tls=true
     middlewares=["error-pages-middleware@docker"]
     service = "subconverter-service"
 

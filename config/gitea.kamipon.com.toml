@@ -2,6 +2,7 @@
   [http.routers.gitea]
     entrypoints=["https"]
     rule="HostRegexp(`gitea.kamipon.com`,`{subdomain:[.*@]?}gitea.kamipon.com`)"
+    tls=true
     # middlewares=["error-pages-middleware@docker"]
     service = "gitea-service"
 
