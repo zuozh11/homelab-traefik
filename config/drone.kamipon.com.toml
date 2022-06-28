@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.drone]
+    entrypoints=["https"]
+    rule="Host(`drone.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file"]
+    service = "drone-service"
+
+[http.services]
+  [http.services.drone-service.loadBalancer]
+    [[http.services.drone-service.loadBalancer.servers]]
+      url = "http://10.99.1.33/"
