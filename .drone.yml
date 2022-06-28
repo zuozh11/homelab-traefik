@@ -1,0 +1,52 @@
+kind: pipeline
+type: ssh
+name: update-config
+clone:
+  disable: true
+server:
+  host: 
+    from_secret: openwrt-ssh-host
+  user: 
+    from_secret: openwrt-ssh-user
+  password: 
+    from_secret: openwrt-ssh-pwd
+
+steps:
+- name: 更新配置
+  commands:
+  - cd /root/homelab-traefik
+  - git pull
+
+---
+kind: pipeline
+type: docker
+name: notice
+clone:
+  disable: true
+depends_on:
+- update-config
+trigger:
+  status:
+  - failure
+
+steps:
+- name: 通知
+  image: yakumioto/drone-serverchan
+  pull: if-not-exists
+  failure: ignore
+  settings:
+    key: 
+      from_secret: serverchan-key
+    text: "🔨**${DRONE_REPO_NAME}** ${DRONE_BUILD_STATUS}"
+    desp: |
+      | 项目名称     | **${DRONE_REPO_NAME}**|
+      |--------------|--------------------------------------|
+      | 实时状态     | ![Build Status](https://drone.kamipon.com:442/api/badges/zuozhi/${DRONE_REPO_NAME}/status.svg)|
+      | 当前状态     | **${DRONE_BUILD_STATUS}**  |
+      | 项目地址     | [跳转到GIT仓库](${DRONE_REPO_LINK})  |
+      | 构建日志     | [跳转到DroneCI](${DRONE_BUILD_LINK}) |
+      | 构建ID       | ${DRONE_BUILD_NUMBER}            |
+      | 当前分支     | ${DRONE_COMMIT_BRANCH}           |
+      | 当前提交信息 | ${DRONE_COMMIT_MESSAGE}           |
+
+...
