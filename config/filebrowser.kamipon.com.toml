@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.filebrowser]
+    entrypoints=["https"]
+    rule="Host(`filebrowser.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file","error-pages-middleware@docker"]
+    service = "filebrowser-service"
+
+[http.services]
+  [http.services.filebrowser-service.loadBalancer]
+    [[http.services.filebrowser-service.loadBalancer.servers]]
+      url = "http://10.99.1.11/"
