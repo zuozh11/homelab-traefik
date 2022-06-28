@@ -8,4 +8,4 @@
 [http.services]
   [http.services.portainer-service.loadBalancer]
     [[http.services.portainer-service.loadBalancer.servers]]
-      url = "http://10.99.1.2:9006/"
+      url = "http://10.99.1.2:9996/"
