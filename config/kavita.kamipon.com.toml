@@ -3,7 +3,7 @@
     entrypoints=["https"]
     rule="Host(`kavita.kamipon.com`,`manga.kamipon.com`)"
     tls=true
-    middlewares=["gzip@file","error-pages-middleware@docker"]
+    middlewares=["gzip@file"]
     service = "kavita-service"
 
 [http.services]
