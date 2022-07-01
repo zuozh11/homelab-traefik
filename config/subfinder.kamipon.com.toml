@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.subfinder]
+    entrypoints=["https"]
+    rule="Host(`subfinder.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file","error-pages-middleware@docker"]
+    service = "subfinder-service"
+
+[http.services]
+  [http.services.subfinder-service.loadBalancer]
+    [[http.services.subfinder-service.loadBalancer.servers]]
+      url = "http://10.99.1.19:19035/"
