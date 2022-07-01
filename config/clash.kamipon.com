@@ -1,13 +1,13 @@
 [http.routers]
-  [http.routers.openwrt]
+  [http.routers.clash]
     entrypoints="https"
     rule="Host(`clash.kamipon.com`)"
     tls=true
     # middlewares=["error-pages-middleware@docker"]
     middlewares=["gzip@file"]
-    service = "openwrt-service"
+    service = "clash-service"
 
 [http.services]
-  [http.services.openwrt-service.loadBalancer]
-    [[http.services.openwrt-service.loadBalancer.servers]]
+  [http.services.clash-service.loadBalancer]
+    [[http.services.clash-service.loadBalancer.servers]]
       url = "http://10.99.1.1:9090/"
