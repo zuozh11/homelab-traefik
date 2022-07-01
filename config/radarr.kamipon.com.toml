@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.radarr]
+    entrypoints=["https"]
+    rule="Host(`radarr.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file","error-pages-middleware@docker"]
+    service = "radarr-service"
+
+[http.services]
+  [http.services.radarr-service.loadBalancer]
+    [[http.services.radarr-service.loadBalancer.servers]]
+      url = "http://10.99.1.2:7878/"
