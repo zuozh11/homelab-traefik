@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.qbittorrent-up]
+    entrypoints=["https"]
+    rule="Host(`qbittorrent-up.kamipon.com`,`qb-up.kamipon.com`,)"
+    tls=true
+    middlewares=["gzip@file","error-pages-middleware@docker"]
+    service = "qbittorrent-up-service"
+
+[http.services]
+  [http.services.qbittorrent-up-service.loadBalancer]
+    [[http.services.qbittorrent-up-service.loadBalancer.servers]]
+      url = "http://10.99.1.15:8080/"
