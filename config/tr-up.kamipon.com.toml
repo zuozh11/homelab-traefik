@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.transmission-up]
+    entrypoints=["https"]
+    rule="Host(`transmission-up.kamipon.com`,`tr-up.kamipon.com`,)"
+    tls=true
+    middlewares=["gzip@file","error-pages-middleware@docker"]
+    service = "transmission-up-service"
+
+[http.services]
+  [http.services.transmission-up-service.loadBalancer]
+    [[http.services.transmission-up-service.loadBalancer.servers]]
+      url = "http://10.99.1.16:9091/"
