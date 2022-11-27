@@ -3,7 +3,7 @@
     entrypoints=["https"]
     rule="Host(`transmission.kamipon.com`,`tr.kamipon.com`,)"
     tls=true
-    middlewares=["gzip@file","error-pages-middleware@docker"]
+    middlewares=["gzip@file"]
     service = "transmission-service"
 
 [http.services]
