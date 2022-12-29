@@ -1,0 +1,13 @@
+[http.routers]
+  [http.routers.kubesphere]
+    entrypoints="https"
+    rule="Host(`kubesphere.kamipon.com`)"
+    tls=true
+    # middlewares=["error-pages-middleware@docker"]
+    middlewares=["gzip@file"]
+    service = "kubesphere-service"
+
+[http.services]
+  [http.services.kubesphere-service.loadBalancer]
+    [[http.services.kubesphere-service.loadBalancer.servers]]
+      url = "http://10.99.1.102:30880/"
