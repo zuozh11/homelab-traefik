@@ -4,7 +4,7 @@
     rule="Host(`dev.nacos.kamipon.com`)"
     tls=true
     middlewares=["gzip@file"]
-    service = "dev.nacos-service"
+    service = "dev_nacos-service"
 
 [http.services]
   [http.services.dev_nacos-service.loadBalancer]

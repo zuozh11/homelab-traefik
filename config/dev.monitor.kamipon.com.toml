@@ -4,7 +4,7 @@
     rule="Host(`dev.monitor.kamipon.com`)"
     tls=true
     middlewares=["gzip@file"]
-    service = "dev.monitor-service"
+    service = "dev_monitor-service"
 
 [http.services]
   [http.services.dev_monitor-service.loadBalancer]

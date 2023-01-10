@@ -4,7 +4,7 @@
     rule="Host(`dev.kibana.kamipon.com`)"
     tls=true
     middlewares=["gzip@file"]
-    service = "dev.kibana-service"
+    service = "dev_kibana-service"
 
 [http.services]
   [http.services.dev_kibana-service.loadBalancer]
