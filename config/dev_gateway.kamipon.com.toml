@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.dev_gateway]
     entrypoints=["https"]
-    rule="Host(`dev.gateway.kamipon.com`)"
+    rule="Host(`dev_gateway.kamipon.com`)"
     tls=true
     middlewares=["gzip@file"]
     service = "dev_gateway-service"

@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.dev_kibana]
     entrypoints=["https"]
-    rule="Host(`dev.kibana.kamipon.com`)"
+    rule="Host(`dev_kibana.kamipon.com`)"
     tls=true
     middlewares=["gzip@file"]
     service = "dev_kibana-service"
