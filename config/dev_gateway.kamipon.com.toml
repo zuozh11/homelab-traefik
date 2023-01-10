@@ -6,7 +6,6 @@
     middlewares=["gzip@file"]
     service = "dev_gateway-service"
 
-
 [http.services]
   [http.services.dev_gateway-service.loadBalancer]
     [[http.services.dev_gateway-service.loadBalancer.servers]]
