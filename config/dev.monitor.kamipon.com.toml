@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.dev.monitor]
+    entrypoints=["https"]
+    rule="Host(`dev.monitor.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file"]
+    service = "dev.monitor-service"
+
+[http.services]
+  [http.services.dev.monitor-service.loadBalancer]
+    [[http.services.dev.monitor-service.loadBalancer.servers]]
+      url = "http://10.99.1.102:11100/"

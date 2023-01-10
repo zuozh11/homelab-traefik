@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.dev.kibana]
+    entrypoints=["https"]
+    rule="Host(`dev.kibana.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file"]
+    service = "dev.kibana-service"
+
+[http.services]
+  [http.services.dev.kibana-service.loadBalancer]
+    [[http.services.dev.kibana-service.loadBalancer.servers]]
+      url = "http://10.99.1.102:5601/"
