@@ -1,12 +1,12 @@
 [http.routers]
-  [http.routers.dev_gateway]
+  [http.routers.k-gateway]
     entrypoints=["https"]
-    rule="Host(`dev_gateway.kamipon.com`)"
+    rule="Host(`k-gateway.kamipon.com`)"
     tls=true
     middlewares=["gzip@file"]
-    service = "dev_gateway-service"
+    service = "k-gateway-service"
 
 [http.services]
-  [http.services.dev_gateway-service.loadBalancer]
-    [[http.services.dev_gateway-service.loadBalancer.servers]]
+  [http.services.k-gateway-service.loadBalancer]
+    [[http.services.k-gateway-service.loadBalancer.servers]]
       url = "http://10.99.1.102:8020/"
