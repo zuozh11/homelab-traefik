@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.k-nacos]
+    entrypoints=["https"]
+    rule="Host(`k-nacos.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file"]
+    service = "k-nacos-service"
+
+[http.services]
+  [http.services.k-nacos-service.loadBalancer]
+    [[http.services.k-nacos-service.loadBalancer.servers]]
+      url = "http://10.99.1.102:8848/"
