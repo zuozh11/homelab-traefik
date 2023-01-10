@@ -1,5 +1,5 @@
 [http.routers]
-  [http.routers.dev.monitor]
+  [http.routers.dev_monitor]
     entrypoints=["https"]
     rule="Host(`dev.monitor.kamipon.com`)"
     tls=true
@@ -7,6 +7,6 @@
     service = "dev.monitor-service"
 
 [http.services]
-  [http.services.dev.monitor-service.loadBalancer]
-    [[http.services.dev.monitor-service.loadBalancer.servers]]
+  [http.services.dev_monitor-service.loadBalancer]
+    [[http.services.dev_monitor-service.loadBalancer.servers]]
       url = "http://10.99.1.102:11100/"
