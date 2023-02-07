@@ -40,11 +40,8 @@ services:
       - '--global.sendanonymoususage=false'
       - '--global.checknewversion=true'
       - '--entrypoints.http.address=:82'
-      # global redirect to https
-      - '--entrypoints.http.http.redirections.entryPoint.to=https'
-      - '--entrypoints.http.http.redirections.entryPoint.scheme=https'
       - '--entrypoints.https.address=:442'
-      - '--entrypoints.https.http.tls=true'
+      # - '--entrypoints.https.http.tls=true'
       - "--entrypoints.ssh.address=:2222"
       - "--entrypoints.mysql.address=:3306"
       - "--entrypoints.redis.address=:6379"
