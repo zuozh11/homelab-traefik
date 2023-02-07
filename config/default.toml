@@ -10,7 +10,7 @@
 
 [http.routers]
   [http.routers.https-redirect]
-    entryPoints = ["http","https-nontls"]
+    entryPoints = ["http"]
     rule = "HostRegexp(`{any:.*}`)"
     middlewares = ["https-redirect"]
     priority = 9

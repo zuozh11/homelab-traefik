@@ -42,8 +42,6 @@ services:
       - '--entrypoints.http.address=:82'
       - '--entrypoints.https.address=:442'
       - '--entrypoints.https.http.tls=true'
-      - '--entrypoints.https-nontls.address=:442'
-      - '--entrypoints.https-nontls.http.tls=false'
       - "--entrypoints.ssh.address=:2222"
       - "--entrypoints.mysql.address=:3306"
       - "--entrypoints.redis.address=:6379"
