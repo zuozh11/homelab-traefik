@@ -9,4 +9,4 @@
 [http.services]
   [http.services.nexus-service.loadBalancer]
     [[http.services.nexus-service.loadBalancer.servers]]
-      url = "http://10.99.1.17:8081/"
+      url = "http://10.99.1.2:8081/"
