@@ -1,0 +1,14 @@
+[http.routers]
+  [http.routers.cloud]
+    entrypoints=["https"]
+    rule="HostRegexp(`{subdomain:.*}.cloud.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file"]
+    service = "cloud-service"
+
+[http.services]
+  [http.services.cloud-service.loadBalancer]
+    [[http.services.cloud-service.loadBalancer.servers]]
+      url = "http://10.99.1.102:31614/"
+    [[http.services.cloud-service.loadBalancer.servers]]
+      url = "http://10.99.1.229:31614/"

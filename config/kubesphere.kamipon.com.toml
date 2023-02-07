@@ -11,3 +11,5 @@
   [http.services.kubesphere-service.loadBalancer]
     [[http.services.kubesphere-service.loadBalancer.servers]]
       url = "http://10.99.1.102:30880/"
+    [[http.services.kubesphere-service.loadBalancer.servers]]
+      url = "http://10.99.1.229:30880/"
