@@ -26,3 +26,4 @@
 [http.middlewares.https-redirect.redirectScheme]
   scheme = "https"
   port = 442
+  tls=true
