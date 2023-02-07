@@ -26,3 +26,7 @@
 [http.middlewares.https-redirect.redirectScheme]
   scheme = "https"
   port = 442
+
+[http.middlewares.https-redirect.redirectRegex]
+  regex = "^https?://(.*)"
+  replacement = "https://${0}"
