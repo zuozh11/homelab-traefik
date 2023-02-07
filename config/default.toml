@@ -15,7 +15,20 @@
     middlewares = ["https-redirect"]
     priority = 9
     service = "noop"
+  [http.routers.https2-redirect]
+    entryPoints = ["https"]
+    tls = false
+    rule = "HostRegexp(`{any:.*}`)"
+    middlewares = ["https-redirect"]
+    priority = 9
+    service = "noop"
 
 [http.middlewares.https-redirect.redirectScheme]
   scheme = "https"
   port = 442
+
+[http.middlewares]
+  [http.middlewares.https-redirect.redirectRegex]
+    regex = "^http://(.*)"
+    replacement = "https://$1"
+    permanent = true
