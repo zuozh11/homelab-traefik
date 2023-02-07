@@ -17,6 +17,7 @@
     service = "noop"
   [http.routers.https2-redirect]
     entryPoints = ["https"]
+    tls = false
     rule = "HostRegexp(`{any:^http://.*}`)"
     middlewares = ["https-redirect-scheme"]
     priority = 8
