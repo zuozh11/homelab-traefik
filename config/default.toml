@@ -12,22 +12,16 @@
   [http.routers.https-redirect]
     entryPoints = ["http"]
     rule = "HostRegexp(`{any:.*}`)"
-    middlewares = ["https-redirect-scheme","https-redirect-regex"]
+    middlewares = ["https-redirect-scheme"]
     priority = 9
     service = "noop"
   [http.routers.https2-redirect]
     entryPoints = ["https"]
-    tls = false
-    rule = "HostRegexp(`{any:.*}`)"
-    middlewares = ["https-redirect-scheme","https-redirect-regex"]
-    priority = 9
+    rule = "HostRegexp(`{any:^http://.*}`)"
+    middlewares = ["https-redirect-scheme"]
+    priority = 8
     service = "noop"
 
 [http.middlewares.https-redirect-scheme.redirectScheme]
   scheme = "https"
   port = 442
-
-[http.middlewares.https-redirect-regex.redirectRegex]
-  regex = "^http://(.*)"
-  replacement = "https://$1"
-  permanent = true
