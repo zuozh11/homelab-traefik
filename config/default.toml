@@ -20,7 +20,7 @@
     tls = false
     rule = "HostRegexp(`{any:.*}`)"
     middlewares = ["https-redirect-scheme"]
-    priority = 10
+    priority = 8
     service = "noop"
 
 [http.middlewares.https-redirect-scheme.redirectScheme]
