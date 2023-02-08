@@ -15,13 +15,13 @@
     middlewares = ["https-redirect-scheme"]
     priority = 9
     service = "noop"
-  [http.routers.https2-redirect]
-    entryPoints = ["https"]
-    tls = false
-    rule = "HostRegexp(`{any:.*}`)"
-    middlewares = ["https-redirect-scheme"]
-    priority = 8
-    service = "noop"
+  # [http.routers.https2-redirect]
+  #   entryPoints = ["https"]
+  #   tls = false
+  #   rule = "HostRegexp(`{any:.*}`)"
+  #   middlewares = ["https-redirect-scheme"]
+  #   priority = 8
+  #   service = "noop"
 
 [http.middlewares.https-redirect-scheme.redirectScheme]
   scheme = "https"
