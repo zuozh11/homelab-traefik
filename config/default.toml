@@ -20,9 +20,10 @@
     tls = false
     rule = "HostRegexp(`{any:.*}`)"
     middlewares = ["https-redirect-scheme"]
-    priority = 10
+    priority = 11
     service = "noop"
 
 [http.middlewares.https-redirect-scheme.redirectScheme]
   scheme = "https"
   port = 442
+  permanent = true
