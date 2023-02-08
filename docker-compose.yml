@@ -41,7 +41,7 @@ services:
       - '--global.checknewversion=true'
       - '--entrypoints.http.address=:82'
       - '--entrypoints.https.address=:442'
-      # - '--entrypoints.https.http.tls=true'
+      - '--entrypoints.https.http.tls=true'
       - "--entrypoints.ssh.address=:2222"
       - "--entrypoints.mysql.address=:3306"
       - "--entrypoints.redis.address=:6379"
@@ -51,9 +51,9 @@ services:
       - '--api.dashboard=true'
       - '--api.debug=false'
       # - '--ping=true'
+      - '--accesslog=false'
       - '--log.level=info'
       - '--log.format=common'
-      - '--accesslog=true'
       - '--providers.docker=true'
       - '--providers.docker.watch=true'
       - '--providers.docker.exposedbydefault=false'
