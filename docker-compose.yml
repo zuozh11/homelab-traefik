@@ -41,7 +41,7 @@ services:
       - '--global.checknewversion=true'
       - '--entrypoints.http.address=:82'
       - '--entrypoints.https.address=:442'
-      - '--entrypoints.https.http.tls=true'
+      # - '--entrypoints.https.http.tls=true'
       - "--entrypoints.ssh.address=:2222"
       - "--entrypoints.mysql.address=:3306"
       - "--entrypoints.redis.address=:6379"
@@ -56,9 +56,9 @@ services:
       - '--log.format=common'
       - '--providers.docker=true'
       - '--providers.docker.watch=true'
+      - '--providers.docker.swarmMode=true'
       - '--providers.docker.exposedbydefault=false'
       - '--providers.docker.endpoint=unix:///var/run/docker.sock'
-      - '--providers.docker.swarmMode=false'
       - '--providers.docker.useBindPortIP=false'
       - '--providers.docker.network=bridge'
       - '--providers.redis.endpoints=10.99.1.22:6379'
