@@ -3,7 +3,7 @@
     entrypoints="https"
     rule="Host(`unraid.kamipon.com`)"
     # middlewares=["error-pages-middleware@docker"]
-    middlewares=["gzip@file"]
+    # middlewares=["gzip@file"]
     service = "unraid-service"
 
 [http.services]
