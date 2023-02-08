@@ -50,7 +50,7 @@ services:
       - '--api.insecure=true'
       - '--api.dashboard=true'
       - '--api.debug=false'
-      # - '--ping=true'
+      - '--ping=true'
       - '--accesslog=false'
       - '--log.level=info'
       - '--log.format=common'
