@@ -9,4 +9,4 @@
 [http.services]
   [http.services.unraid-service.loadBalancer]
     [[http.services.unraid-service.loadBalancer.servers]]
-      url = "http://10.99.1.2/"
+      url = "https://10-99-1-2.a519cf5f1b1324a3293c357025796b6c9c37f8a7.myunraid.net/"
