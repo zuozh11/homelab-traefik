@@ -1,6 +1,6 @@
 [http.routers]
   [http.routers.unraid]
-    entrypoints="http"
+    entrypoints="https"
     rule="Host(`unraid.kamipon.com`)"
     # middlewares=["error-pages-middleware@docker"]
     middlewares=["gzip@file"]
