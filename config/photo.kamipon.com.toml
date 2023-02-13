@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.photo]
+    entrypoints=["https"]
+    rule="Host(`photo.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file"]
+    service = "photo-service"
+
+[http.services]
+  [http.services.photo-service.loadBalancer]
+    [[http.services.photo-service.loadBalancer.servers]]
+      url = "http://10.99.1.2:2342/"
