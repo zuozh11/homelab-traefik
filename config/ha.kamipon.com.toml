@@ -10,3 +10,16 @@
   [http.services.ha-service.loadBalancer]
     [[http.services.ha-service.loadBalancer.servers]]
       url = "http://10.99.1.2:8123/"
+
+
+[http.routers]
+  [http.routers.ha-http]
+    entrypoints=["http"]
+    rule="Host(`ha-http.kamipon.com`)"
+    # middlewares=["gzip@file"]
+    service = "ha-http-service"
+
+[http.services]
+  [http.services.ha-http-service.loadBalancer]
+    [[http.services.ha-http-service.loadBalancer.servers]]
+      url = "http://10.99.1.2:8123/"
