@@ -9,4 +9,4 @@
 [http.services]
   [http.services.ha-service.loadBalancer]
     [[http.services.ha-service.loadBalancer.servers]]
-      url = "http://10.99.1.18:8123/"
+      url = "http://10.99.1.2:8123/"
