@@ -8,5 +8,6 @@
 
 [http.services]
   [http.services.ha-service.loadBalancer]
+    passHostHeader = true
     [[http.services.ha-service.loadBalancer.servers]]
       url = "http://10.99.1.2:8123/"
