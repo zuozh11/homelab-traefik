@@ -9,4 +9,4 @@
 [http.services]
   [http.services.subconverter-service.loadBalancer]
     [[http.services.subconverter-service.loadBalancer.servers]]
-      url = "http://10.99.1.102:25500/"
+      url = "http://10.99.1.2:25500/"
