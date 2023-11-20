@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.komga]
+    entrypoints=["https"]
+    rule="Host(`komga.kamipon.com`,`manga.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file"]
+    service = "komga-service"
+
+[http.services]
+  [http.services.komga-service.loadBalancer]
+    [[http.services.komga-service.loadBalancer.servers]]
+      url = "http://10.99.1.2:25600/"
