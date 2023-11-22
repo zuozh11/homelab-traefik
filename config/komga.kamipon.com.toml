@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.komga]
     entrypoints=["https"]
-    rule="Host(`komga.kamipon.com`,`manga.kamipon.com`)"
+    rule="Host(`komga.kamipon.com`)"
     tls=true
     middlewares=["gzip@file"]
     service = "komga-service"
