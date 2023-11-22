@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.komf]
+    entrypoints=["https"]
+    rule="Host(`komf.kamipon.com`,`manga.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file"]
+    service = "komf-service"
+
+[http.services]
+  [http.services.komf-service.loadBalancer]
+    [[http.services.komf-service.loadBalancer.servers]]
+      url = "http://10.99.1.2:8085/"
