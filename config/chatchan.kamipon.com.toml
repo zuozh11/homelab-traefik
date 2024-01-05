@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.chatchan]
+    entrypoints=["https"]
+    rule="Host(`chatchan.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file"]
+    service = "chatchan-service"
+
+[http.services]
+  [http.services.chatchan-service.loadBalancer]
+    [[http.services.chatchan-service.loadBalancer.servers]]
+      url = "http://10.99.1.34:9000/"
