@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.homelab]
     entrypoints=["https"]
-    rule="Host(`homelab.kamipon.com`,`www.kamipon.com`,`flame.kamipon.com`)"
+    rule="Host(`homelab.kamipon.com`,`flame.kamipon.com`)"
     tls=true
     middlewares=["gzip@file","error-pages-middleware@docker"]
     service = "homelab-service"

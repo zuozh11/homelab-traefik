@@ -76,38 +76,38 @@ services:
       - 'traefik.http.routers.traefik-dash-web.rule=Host(`traefik.kamipon.com`) && PathPrefix(`/`)'
       - 'traefik.http.routers.traefik-dash-web.tls=true'
       - 'traefik.http.routers.traefik-dash-web.service=dashboard@internal'
-      # - 'traefik.http.routers.traefik-dash-web.middlewares=error-pages-middleware'
+      - 'traefik.http.routers.traefik-dash-web.middlewares=error-pages-middleware'
       # 处理接口
       - 'traefik.http.routers.traefik-dash-api.entrypoints=https'
       - 'traefik.http.routers.traefik-dash-api.rule=Host(`traefik.kamipon.com`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))'
       - 'traefik.http.routers.traefik-dash-api.tls=true'
       - 'traefik.http.routers.traefik-dash-api.service=api@internal'
-      # - 'traefik.http.routers.traefik-dash-api.middlewares=error-pages-middleware'
-    # depends_on:
-    #   - error-pages
+      - 'traefik.http.routers.traefik-dash-api.middlewares=error-pages-middleware'
+    depends_on:
+      - error-pages
 
-  # error-pages:
-  #   image: tarampampam/error-pages:latest # Using the latest tag is highly discouraged. Please, use tags in X.Y.Z format
-  #   container_name: error-pages
-  #   restart: always
-  #   network_mode: bridge
-  #   environment:
-  #     # - "TEMPLATE_NAME=ghost"
-  #     - 'TEMPLATE_NAME=app-down'
-  #   labels:
-  #     - 'traefik.enable=true'
-  #     # use as "fallback" for any NON-registered services (with priority below normal)
-  #     - 'traefik.http.routers.error-pages-router.rule=HostRegexp(`{host:.+}`)'
-  #     - 'traefik.http.routers.error-pages-router.priority=10'
-  #     # should say that all of your services work on https
-  #     - 'traefik.http.routers.error-pages-router.entrypoints=https'
-  #     - 'traefik.http.routers.error-pages-router.middlewares=error-pages-middleware'
-  #     # "errors" middleware settings
-  #     - 'traefik.http.middlewares.error-pages-middleware.errors.status=400-599'
-  #     - 'traefik.http.middlewares.error-pages-middleware.errors.service=error-pages-service'
-  #     - 'traefik.http.middlewares.error-pages-middleware.errors.query=/{status}.html'
-  #     # define service properties
-  #     - 'traefik.http.services.error-pages-service.loadbalancer.server.port=8080'
+  error-pages:
+      image: tarampampam/error-pages:latest # Using the latest tag is highly discouraged. Please, use tags in X.Y.Z format
+      container_name: error-pages
+      restart: always
+      network_mode: bridge
+      environment:
+        # - "TEMPLATE_NAME=ghost"
+        - 'TEMPLATE_NAME=app-down'
+      labels:
+        - 'traefik.enable=true'
+        # use as "fallback" for any NON-registered services (with priority below normal)
+        - 'traefik.http.routers.error-pages-router.rule=HostRegexp(`{host:.+}`)'
+        - 'traefik.http.routers.error-pages-router.priority=10'
+        # should say that all of your services work on https
+        - 'traefik.http.routers.error-pages-router.entrypoints=https'
+        - 'traefik.http.routers.error-pages-router.middlewares=error-pages-middleware'
+        # "errors" middleware settings
+        - 'traefik.http.middlewares.error-pages-middleware.errors.status=400-599'
+        - 'traefik.http.middlewares.error-pages-middleware.errors.service=error-pages-service'
+        - 'traefik.http.middlewares.error-pages-middleware.errors.query=/{status}.html'
+        # define service properties
+        - 'traefik.http.services.error-pages-service.loadbalancer.server.port=8080'
 
   acme:
     image: neilpang/acme.sh

@@ -5,16 +5,16 @@ clone:
   disable: true
 server:
   host: 
-    from_secret: openwrt-ssh-host
+    from_secret: unraid-ssh-host
   user: 
-    from_secret: openwrt-ssh-user
+    from_secret: unraid-ssh-user
   password: 
-    from_secret: openwrt-ssh-pwd
+    from_secret: unraid-ssh-pwd
 
 steps:
 - name: 更新配置
   commands:
-  - cd /root/homelab-traefik
+  - cd /mnt/user/appdata/homelab-traefik
   - git pull
 
 ---

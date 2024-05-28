@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.www]
+    entrypoints=["https"]
+    rule="Host(`www.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file","error-pages-middleware@docker"]
+    service = "www-service"
+
+[http.services]
+  [http.services.www-service.loadBalancer]
+    [[http.services.www-service.loadBalancer.servers]]
+      url = "http://10.99.1.2:10004/"
