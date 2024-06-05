@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.cloud]
     entrypoints=["https"]
-    rule="HostRegexp(`{subdomain:.*}.cloud.kamipon.com`)"
+    rule=HostRegexp(`{subdomain:.*}.cloud.kamipon.com`)
     tls=true
     middlewares=["gzip@file"]
     service = "cloud-service"

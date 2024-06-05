@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.nextcloud]
     entrypoints=["https"]
-    rule="Host(`nextcloud.kamipon.com`)"
+    rule=Host(`nextcloud.kamipon.com`)
     tls=true
     middlewares=["nextcloud-dav@file","gzip@file"]
     service = "nextcloud-service"

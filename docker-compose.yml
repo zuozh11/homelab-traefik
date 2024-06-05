@@ -36,7 +36,6 @@ services:
       - ./config:/etc/traefik/config/:ro
       - ./cert/:/data/cert/:ro
     command:
-      - '--pilot.token=1b75f1f2-252b-45fa-8695-d1f2bfaf2151'
       - '--global.sendanonymoususage=false'
       - '--global.checknewversion=true'
       - '--entrypoints.http.address=:82'
@@ -56,7 +55,6 @@ services:
       - '--log.format=common'
       - '--providers.docker=true'
       - '--providers.docker.watch=true'
-      - '--providers.docker.swarmMode=false'
       - '--providers.docker.exposedbydefault=false'
       - '--providers.docker.endpoint=unix:///var/run/docker.sock'
       - '--providers.docker.useBindPortIP=false'
@@ -83,8 +81,6 @@ services:
       - 'traefik.http.routers.traefik-dash-api.tls=true'
       - 'traefik.http.routers.traefik-dash-api.service=api@internal'
       - 'traefik.http.routers.traefik-dash-api.middlewares=error-pages-middleware'
-    depends_on:
-      - error-pages
 
   error-pages:
       image: tarampampam/error-pages:latest # Using the latest tag is highly discouraged. Please, use tags in X.Y.Z format
@@ -108,7 +104,9 @@ services:
         - 'traefik.http.middlewares.error-pages-middleware.errors.query=/{status}.html'
         # define service properties
         - 'traefik.http.services.error-pages-service.loadbalancer.server.port=8080'
-
+    depends_on:
+      - traefik
+      
   acme:
     image: neilpang/acme.sh
     container_name: acme.sh

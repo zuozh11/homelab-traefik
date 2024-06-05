@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.ha]
     entrypoints=["https"]
-    rule="Host(`ha.kamipon.com`,`homeassistent.kamipon.com`)"
+    rule=Host(`ha.kamipon.com`) || Host(`homeassistent.kamipon.com`)
     tls=true
     # middlewares=["gzip@file"]
     service = "ha-service"

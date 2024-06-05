@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.chatchan]
     entrypoints=["https"]
-    rule="Host(`chatchan.kamipon.com`)"
+    rule=Host(`chatchan.kamipon.com`)
     tls=true
     middlewares=["gzip@file"]
     service = "chatchan-service"

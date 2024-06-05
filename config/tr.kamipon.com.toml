@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.transmission]
     entrypoints=["https"]
-    rule="Host(`transmission.kamipon.com`,`tr.kamipon.com`,)"
+    rule=Host(`transmission.kamipon.com`) || Host(`tr.kamipon.com`,)
     tls=true
     middlewares=["gzip@file"]
     service = "transmission-service"

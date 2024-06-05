@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.portainer]
     entrypoints=["https"]
-    rule="Host(`portainer.kamipon.com`)"
+    rule=Host(`portainer.kamipon.com`)
     tls=true
     middlewares=["gzip@file","error-pages-middleware@docker"]
     service = "portainer-service"

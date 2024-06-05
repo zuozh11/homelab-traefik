@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.photo]
     entrypoints=["https"]
-    rule="Host(`photo.kamipon.com`)"
+    rule=Host(`photo.kamipon.com`)
     tls=true
     middlewares=["gzip@file"]
     service = "photo-service"
