@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.nexus]
     entrypoints=["https"]
-    rule="Host(`nexus.kamipon.com`)"
+    rule=Host(`nexus.kamipon.com`)
     tls=true
     middlewares=["gzip@file"]
     service = "nexus-service"

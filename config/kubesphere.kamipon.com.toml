@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.kubesphere]
     entrypoints="https"
-    rule="Host(`kubesphere.kamipon.com`)"
+    rule=Host(`kubesphere.kamipon.com`)
     tls=true
     # middlewares=["error-pages-middleware@docker"]
     middlewares=["gzip@file"]

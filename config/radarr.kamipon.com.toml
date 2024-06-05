@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.radarr]
     entrypoints=["https"]
-    rule="Host(`radarr.kamipon.com`)"
+    rule=Host(`radarr.kamipon.com`)
     tls=true
     middlewares=["gzip@file","error-pages-middleware@docker"]
     service = "radarr-service"
