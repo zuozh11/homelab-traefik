@@ -104,9 +104,9 @@ services:
         - 'traefik.http.middlewares.error-pages-middleware.errors.query=/{status}.html'
         # define service properties
         - 'traefik.http.services.error-pages-service.loadbalancer.server.port=8080'
-    depends_on:
-      - traefik
-      
+      depends_on:
+        - traefik
+
   acme:
     image: neilpang/acme.sh
     container_name: acme.sh
