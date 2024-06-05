@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.gitea]
     entrypoints=["https"]
-    rule="HostRegexp(`gitea.kamipon.com`,`{subdomain:[.*@]?}gitea.kamipon.com`)"
+    rule="HostRegexp(`gitea.kamipon.com`) || HostRegexp(`{subdomain:[.*@]?}gitea.kamipon.com`)"
     tls=true
     # middlewares=["error-pages-middleware@docker"]
     service = "gitea-service"
@@ -10,14 +10,3 @@
   [http.services.gitea-service.loadBalancer]
     [[http.services.gitea-service.loadBalancer.servers]]
       url = "http://10.99.1.31:3000/"
-
-[tcp.routers]
-  [tcp.routers.gitea-ssh]
-    entrypoints="ssh"
-    rule = "HostSNI(`*`)"
-    service = "gitea-ssh-service"
-
-[tcp.services]
-  [tcp.services.gitea-ssh-service.loadBalancer]
-    [[tcp.services.gitea-ssh-service.loadBalancer.servers]]
-      address = "10.99.1.31:22"

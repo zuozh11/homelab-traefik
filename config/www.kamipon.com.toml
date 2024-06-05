@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.www]
     entrypoints=["https"]
-    rule="Host(`www.kamipon.com`)"
+    rule="Host(`www.kamipon.com`) || Host(`kamipon.com`)"
     tls=true
     middlewares=["gzip@file","error-pages-middleware@docker"]
     service = "www-service"

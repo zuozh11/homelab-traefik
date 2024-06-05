@@ -12,10 +12,6 @@ services:
     ports:
       - 82:82
       - 442:442
-      - 3306:3306
-      - 6379:6379
-      - 2222:2222
-      - 5432:5432
     logging:
       driver: 'json-file'
       options:
@@ -36,16 +32,11 @@ services:
       - ./config:/etc/traefik/config/:ro
       - ./cert/:/data/cert/:ro
     command:
-      - '--pilot.token=1b75f1f2-252b-45fa-8695-d1f2bfaf2151'
       - '--global.sendanonymoususage=false'
       - '--global.checknewversion=true'
       - '--entrypoints.http.address=:82'
       - '--entrypoints.https.address=:442'
       # - '--entrypoints.https.http.tls=true'
-      - "--entrypoints.ssh.address=:2222"
-      - "--entrypoints.mysql.address=:3306"
-      - "--entrypoints.redis.address=:6379"
-      - "--entrypoints.postgres.address=:5432"
       - '--api=true'
       - '--api.insecure=true'
       - '--api.dashboard=true'
@@ -56,7 +47,6 @@ services:
       - '--log.format=common'
       - '--providers.docker=true'
       - '--providers.docker.watch=true'
-      - '--providers.docker.swarmMode=false'
       - '--providers.docker.exposedbydefault=false'
       - '--providers.docker.endpoint=unix:///var/run/docker.sock'
       - '--providers.docker.useBindPortIP=false'
@@ -83,31 +73,31 @@ services:
       - 'traefik.http.routers.traefik-dash-api.tls=true'
       - 'traefik.http.routers.traefik-dash-api.service=api@internal'
       - 'traefik.http.routers.traefik-dash-api.middlewares=error-pages-middleware'
-    depends_on:
-      - error-pages
 
   error-pages:
-      image: tarampampam/error-pages:latest # Using the latest tag is highly discouraged. Please, use tags in X.Y.Z format
-      container_name: error-pages
-      restart: always
-      network_mode: bridge
-      environment:
-        # - "TEMPLATE_NAME=ghost"
-        - 'TEMPLATE_NAME=app-down'
-      labels:
-        - 'traefik.enable=true'
-        # use as "fallback" for any NON-registered services (with priority below normal)
-        - 'traefik.http.routers.error-pages-router.rule=HostRegexp(`{host:.+}`)'
-        - 'traefik.http.routers.error-pages-router.priority=10'
-        # should say that all of your services work on https
-        - 'traefik.http.routers.error-pages-router.entrypoints=https'
-        - 'traefik.http.routers.error-pages-router.middlewares=error-pages-middleware'
-        # "errors" middleware settings
-        - 'traefik.http.middlewares.error-pages-middleware.errors.status=400-599'
-        - 'traefik.http.middlewares.error-pages-middleware.errors.service=error-pages-service'
-        - 'traefik.http.middlewares.error-pages-middleware.errors.query=/{status}.html'
-        # define service properties
-        - 'traefik.http.services.error-pages-service.loadbalancer.server.port=8080'
+    image: tarampampam/error-pages:latest # Using the latest tag is highly discouraged. Please, use tags in X.Y.Z format
+    container_name: error-pages
+    restart: always
+    network_mode: bridge
+    environment:
+      # - "TEMPLATE_NAME=ghost"
+      - 'TEMPLATE_NAME=app-down'
+    labels:
+      - 'traefik.enable=true'
+      # use as "fallback" for any NON-registered services (with priority below normal)
+      - 'traefik.http.routers.error-pages-router.rule=HostRegexp(`{host:.+}`)'
+      - 'traefik.http.routers.error-pages-router.priority=10'
+      # should say that all of your services work on https
+      - 'traefik.http.routers.error-pages-router.entrypoints=https'
+      - 'traefik.http.routers.error-pages-router.middlewares=error-pages-middleware'
+      # "errors" middleware settings
+      - 'traefik.http.middlewares.error-pages-middleware.errors.status=400-599'
+      - 'traefik.http.middlewares.error-pages-middleware.errors.service=error-pages-service'
+      - 'traefik.http.middlewares.error-pages-middleware.errors.query=/{status}.html'
+      # define service properties
+      - 'traefik.http.services.error-pages-service.loadbalancer.server.port=8080'
+    depends_on:
+      - error-pages
 
   acme:
     image: neilpang/acme.sh
@@ -115,7 +105,7 @@ services:
     restart: always
     network_mode: bridge
     volumes:
-      # - /etc/localtime:/etc/localtime:ro
+      - /etc/localtime:/etc/localtime:ro
       - ./cert:/data/cert
       - ./acme:/acme.sh
     environment:
