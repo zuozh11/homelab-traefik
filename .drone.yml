@@ -15,6 +15,7 @@ steps:
 - name: 更新配置
   commands:
   - cd /mnt/user/appdata/homelab-traefik
+  - sleep 5
   - git pull
 
 ---
