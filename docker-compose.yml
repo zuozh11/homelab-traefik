@@ -97,7 +97,7 @@ services:
       # define service properties
       - 'traefik.http.services.error-pages-service.loadbalancer.server.port=8080'
     depends_on:
-      - error-pages
+      - traefik
 
   acme:
     image: neilpang/acme.sh
