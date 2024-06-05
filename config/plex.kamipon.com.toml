@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.plex]
     entrypoints=["https"]
-    rule=Host(`plex.kamipon.com`)
+    rule="Host(`plex.kamipon.com`)"
     tls=true
     # middlewares=["gzip@file","error-pages-middleware@docker"]
     service = "plex-service"

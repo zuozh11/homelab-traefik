@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.iyuu]
     entrypoints=["https"]
-    rule=Host(`iyuu.kamipon.com`)
+    rule="Host(`iyuu.kamipon.com`)"
     tls=true
     middlewares=["gzip@file","error-pages-middleware@docker"]
     service = "iyuu-service"

@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.clash]
     entrypoints="https"
-    rule=Host(`clash.kamipon.com`)
+    rule="Host(`clash.kamipon.com`)"
     tls=true
     # middlewares=["error-pages-middleware@docker"]
     middlewares=["gzip@file"]

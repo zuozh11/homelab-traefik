@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.sonarr]
     entrypoints=["https"]
-    rule=Host(`sonarr.kamipon.com`)
+    rule="Host(`sonarr.kamipon.com`)"
     tls=true
     middlewares=["gzip@file","error-pages-middleware@docker"]
     service = "sonarr-service"

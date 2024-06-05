@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.emby]
     entrypoints=["https"]
-    rule=Host(`emby.kamipon.com`)
+    rule="Host(`emby.kamipon.com`)"
     tls=true
     middlewares=["gzip@file","error-pages-middleware@docker"]
     service = "emby-service"

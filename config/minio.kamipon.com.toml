@@ -1,13 +1,13 @@
 [http.routers]
   [http.routers.minio]
     entrypoints=["https"]
-    rule=Host(`minio.kamipon.com`)
+    rule="Host(`minio.kamipon.com`)"
     tls=true
     # middlewares=["gzip@file"]
     service = "minio-service"
   [http.routers.minio-api]
     entrypoints=["https"]
-    rule=Host(`share.kamipon.com`)
+    rule="Host(`share.kamipon.com`)"
     tls=true
     service = "minio-api-service"
 
