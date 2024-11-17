@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.syncclipboard]
+    entrypoints=["https"]
+    rule="Host(`syncclipboard.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file"]
+    service = "syncclipboard-service"
+
+[http.services]
+  [http.services.syncclipboard-service.loadBalancer]
+    [[http.services.syncclipboard-service.loadBalancer.servers]]
+      url = "http://10.99.1.2:5033/"
