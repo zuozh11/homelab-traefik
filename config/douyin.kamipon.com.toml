@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.douyin]
+    entrypoints=["https"]
+    rule="Host(`douyin.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file"]
+    service = "douyin-service"
+
+[http.services]
+  [http.services.douyin-service.loadBalancer]
+    [[http.services.douyin-service.loadBalancer.servers]]
+      url = "http://10.99.1.2:8325/"
