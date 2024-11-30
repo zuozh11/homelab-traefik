@@ -9,4 +9,4 @@
 [http.services]
   [http.services.iyuu-service.loadBalancer]
     [[http.services.iyuu-service.loadBalancer.servers]]
-      url = "http://10.99.1.2:8787/"
+      url = "http://10.99.1.2:8780/"
