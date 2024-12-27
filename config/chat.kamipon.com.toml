@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.chat]
+    entrypoints=["https"]
+    rule="Host(`chat.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file"]
+    service = "chat-service"
+
+[http.services]
+  [http.services.chat-service.loadBalancer]
+    [[http.services.chat-service.loadBalancer.servers]]
+      url = "http://10.99.1.2:3000/"
