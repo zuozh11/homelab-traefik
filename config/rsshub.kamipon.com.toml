@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.rsshub]
+    entrypoints=["https"]
+    rule="Host(`rsshub.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file","error-pages-middleware@docker"]
+    service = "rsshub-service"
+
+[http.services]
+  [http.services.rsshub-service.loadBalancer]
+    [[http.services.rsshub-service.loadBalancer.servers]]
+      url = "http://10.99.1.2:1200/"
