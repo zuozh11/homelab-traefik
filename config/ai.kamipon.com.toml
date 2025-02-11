@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.ai]
+    entrypoints=["https"]
+    rule="Host(`ai.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file"]
+    service = "ai-service"
+
+[http.services]
+  [http.services.ai-service.loadBalancer]
+    [[http.services.ai-service.loadBalancer.servers]]
+      url = "http://10.99.1.2:3210/"
