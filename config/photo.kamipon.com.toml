@@ -9,4 +9,4 @@
 [http.services]
   [http.services.photo-service.loadBalancer]
     [[http.services.photo-service.loadBalancer.servers]]
-      url = "http://10.99.1.2:2342/"
+      url = "http://10.99.1.2:2283/"
