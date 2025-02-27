@@ -1,0 +1,13 @@
+[http.routers]
+  [http.routers.searxng]
+    entrypoints="https"
+    rule="Host(`searxng.kamipon.com`)"
+    tls=true
+    # middlewares=["error-pages-middleware@docker"]
+    middlewares=["gzip@file"]
+    service = "searxng-service"
+
+[http.services]
+  [http.services.searxng-service.loadBalancer]
+    [[http.services.searxng-service.loadBalancer.servers]]
+      url = "http://10.99.1.2:8002/"
