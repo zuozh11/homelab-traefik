@@ -6,6 +6,13 @@
     middlewares=["gzip@file","error-pages-middleware@docker"]
     service = "filebrowser-service"
 
+  [http.routers.filebrowser-http]
+    entrypoints=["http"]
+    rule="Host(`filebrowser.kamipon.com`)"
+    tls=false
+    middlewares=["gzip@file","error-pages-middleware@docker"]
+    service = "filebrowser-service"
+
 [http.services]
   [http.services.filebrowser-service.loadBalancer]
     [[http.services.filebrowser-service.loadBalancer.servers]]

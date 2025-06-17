@@ -6,11 +6,22 @@
     middlewares=["nextcloudHeader@file","nextcloud-dav@file","gzip@file"]
     service = "nextcloud-service"
 
+  [http.routers.nextcloud-http]
+    entrypoints=["http"]
+    rule="Host(`nextcloud.kamipon.com`)"
+    tls=false
+    middlewares=["nextcloudHeader@file","nextcloud-dav-http@file","gzip@file"]
+    service = "nextcloud-service"
+
 [http.middlewares]
   [http.middlewares.nextcloud-dav.redirectRegex]
     permanent = true
     regex = "https://(.*)/.well-known/(card|cal)dav"
     replacement = "https://${1}/remote.php/dav/"
+  [http.middlewares.nextcloud-dav-http.redirectRegex]
+    permanent = true
+    regex = "http://(.*)/.well-known/(card|cal)dav"
+    replacement = "http://${1}/remote.php/dav/"
   [http.middlewares.nextcloudHeader.headers]
     stsSeconds = 15552000
     stsIncludeSubdomains = true
