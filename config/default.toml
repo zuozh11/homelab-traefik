@@ -22,8 +22,20 @@
     middlewares = ["https-redirect-scheme"]
     priority = 11
     service = "noop"
+  [http.routers.http-redirect]
+    entryPoints = ["http"]
+    tls = true
+    rule = "HostRegexp(`{any:.*}`)"
+    middlewares = ["http-redirect-scheme"]
+    priority = 13
+    service = "noop"
 
 [http.middlewares.https-redirect-scheme.redirectScheme]
   scheme = "https"
   port = 442
+  permanent = true
+
+[http.middlewares.http-redirect-scheme.redirectScheme]
+  scheme = "http"
+  port = 82
   permanent = true
