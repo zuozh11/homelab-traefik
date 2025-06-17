@@ -5,6 +5,13 @@
     tls=true
     middlewares=["gzip@file","error-pages-middleware@docker"]
     service = "emby-service"
+  
+  [http.routers.emby-http]
+    entrypoints=["http"]
+    rule="Host(`emby.kamipon.com`)"
+    tls=false
+    middlewares=["gzip@file","error-pages-middleware@docker"]
+    service = "emby-service"
 
 [http.services]
   [http.services.emby-service.loadBalancer]
