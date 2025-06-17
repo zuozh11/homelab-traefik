@@ -9,12 +9,12 @@
         url = "" # or url = "localhost"
 
 [http.routers]
-  [http.routers.https-redirect]
-    entryPoints = ["http"]
-    rule = "HostRegexp(`{any:.*}`)"
-    middlewares = ["https-redirect-scheme"]
-    priority = 9
-    service = "noop"
+#   [http.routers.https-redirect]
+#     entryPoints = ["http"]
+#     rule = "HostRegexp(`{any:.*}`)"
+#     middlewares = ["https-redirect-scheme"]
+#     priority = 9
+#     service = "noop"
   [http.routers.https2-redirect]
     entryPoints = ["https"]
     tls = false

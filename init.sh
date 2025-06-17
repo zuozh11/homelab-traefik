@@ -11,7 +11,7 @@ docker exec acme.sh --set-default-ca --server letsencrypt
 echo '设置更新'
 docker exec acme.sh --upgrade --auto-upgrade
 echo '生成证书'
-docker exec acme.sh --issue --dns dns_dp -d 'kamipon.com' -d '*.kamipon.com' -d '*.cloud.kamipon.com'
+docker exec acme.sh --issue --dns dns_dp -d 'kamipon.com' -d '*.kamipon.com'
 echo '安装证书'
 docker exec acme.sh --install-cert -d 'kamipon.com' \
 --key-file       /data/cert/kamipon.key  \

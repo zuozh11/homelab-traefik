@@ -51,8 +51,8 @@ services:
       - '--providers.docker.endpoint=unix:///var/run/docker.sock'
       - '--providers.docker.useBindPortIP=false'
       - '--providers.docker.network=bridge'
-      - '--providers.redis.endpoints=10.99.1.22:6379'
-      - '--providers.redis.password=Zz19960219!'
+      # - '--providers.redis.endpoints=10.99.1.22:6379'
+      # - '--providers.redis.password=Zz19960219!'
       - '--providers.file=true'
       - '--providers.file.watch=true'
       - '--providers.file.directory=/etc/traefik/config'
@@ -73,6 +73,8 @@ services:
       - 'traefik.http.routers.traefik-dash-api.tls=true'
       - 'traefik.http.routers.traefik-dash-api.service=api@internal'
       - 'traefik.http.routers.traefik-dash-api.middlewares=error-pages-middleware'
+    depends_on:
+      - error-pages
 
   error-pages:
     image: tarampampam/error-pages:latest # Using the latest tag is highly discouraged. Please, use tags in X.Y.Z format
@@ -96,8 +98,6 @@ services:
       - 'traefik.http.middlewares.error-pages-middleware.errors.query=/{status}.html'
       # define service properties
       - 'traefik.http.services.error-pages-service.loadbalancer.server.port=8080'
-    depends_on:
-      - traefik
 
   acme:
     image: neilpang/acme.sh

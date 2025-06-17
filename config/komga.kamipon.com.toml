@@ -5,6 +5,12 @@
     tls=true
     middlewares=["gzip@file"]
     service = "komga-service"
+  [http.routers.komga-http]
+    entrypoints=["http"]
+    rule="Host(`komga.kamipon.com`)"
+    tls=false
+    middlewares=["gzip@file"]
+    service = "komga-service"
 
 [http.services]
   [http.services.komga-service.loadBalancer]
