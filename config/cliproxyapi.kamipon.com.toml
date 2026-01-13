@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.cliproxyapi]
+    entrypoints=["https"]
+    rule="Host(`cliproxyapi.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file"]
+    service = "cliproxyapi-service"
+
+[http.services]
+  [http.services.cliproxyapi-service.loadBalancer]
+  [[http.services.cliproxyapi-service.loadBalancer.servers]]
+      url = "http://10.99.1.2:8317/"
