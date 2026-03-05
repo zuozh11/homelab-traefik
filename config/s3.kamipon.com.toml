@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.s3]
+    entrypoints=["https"]
+    rule="Host(`s3.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file"]
+    service = "s3-service"
+
+[http.services]
+  [http.services.s3-service.loadBalancer]
+  [[http.services.s3-service.loadBalancer.servers]]
+      url = "http://10.99.1.2:9000/"

@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.app]
+    entrypoints=["https"]
+    rule="Host(`app.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file"]
+    service = "app-service"
+
+[http.services]
+  [http.services.app-service.loadBalancer]
+  [[http.services.app-service.loadBalancer.servers]]
+      url = "http://10.99.1.2:3210/"
