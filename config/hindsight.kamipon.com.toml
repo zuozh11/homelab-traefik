@@ -9,4 +9,4 @@
 [http.services]
   [http.services.hindsight-service.loadBalancer]
   [[http.services.hindsight-service.loadBalancer.servers]]
-      url = "http://10.99.1.2:24599/"
+      url = "http://10.99.1.34:9999/"
