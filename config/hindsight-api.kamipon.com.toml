@@ -1,0 +1,12 @@
+[http.routers]
+  [http.routers.hindsight-api]
+    entrypoints=["https"]
+    rule="Host(`hindsight-api.kamipon.com`)"
+    tls=true
+    middlewares=["gzip@file"]
+    service = "hindsight-api-service"
+
+[http.services]
+  [http.services.hindsight-api-service.loadBalancer]
+  [[http.services.hindsight-api-service.loadBalancer.servers]]
+      url = "http://10.99.1.2:24588/"
