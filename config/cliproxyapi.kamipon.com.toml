@@ -1,7 +1,7 @@
 [http.routers]
   [http.routers.cliproxyapi]
     entrypoints=["https"]
-    rule="Host(`aiapi.kamipon.com`)"
+    rule="Host(`aiapiv2.kamipon.com`)"
     tls=true
     middlewares=["gzip@file"]
     service = "cliproxyapi-service"
